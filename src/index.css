@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* Reset default margins */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+}
+
+/* Prevent horizontal scrolling only */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  background: #101010;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00c1a1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00a58a;
+}
+
+/* Hide scrollbar buttons */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00c1a1 #101010;
+}
+
+@theme {
+  --font-primary: "League Spartan", "serif";
+  --font-header: "Vipnagorgialla";
+  --font-logo: "Lilita One", "serif";
+  --font-typewriter: "bptypewrite";
+  --font-weight: 300; 
+  --color-avocado-100: oklch(0.99 0 0);
+}
+
+
+
+@font-face {
+  font-family: "Vipnagorgialla";
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("/fonts/Vipnagorgialla Bd.otf") format("opentype");
+}
+@font-face{
+  font-family:  "Lilita One";
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("/fonts/LilitaOne-Regular.ttf") format("truetype");
+}
+@font-face{
+  font-family:  "bptypewrite";
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("/fonts/bptypewrite.damaged.otf") format("opentype");
+}
+
+.nav-link {
+  letter-spacing: 0.05em; 
+}
+.nav-link {
+  position: relative;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight); 
+}
+
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0.5px;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  transition: width 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.nav-link:hover::after {
+  width: 60%;
+  opacity: 1;
+}
+
+/* Cursor Styles */
+.cursor-dot {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+  will-change: transform;
+}
+
+/* Cursor Text Styles */
+.cursor-text {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 14px;
+  font-family: var(--font-typewriter);
+  margin-top: 10px;
+}
+
+/* Hide default cursor everywhere */
+* {
+  cursor: none !important;
+}
+
+/* Allow interactions with clickable elements */
+a, button, [role="button"], input, label, select, textarea, [onclick] {
+  pointer-events: auto;
+}
