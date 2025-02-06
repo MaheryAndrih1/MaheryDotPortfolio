@@ -65,7 +65,7 @@ const Navbar = () => {
       {/* Existing Navbar */}
       <div
         ref={navContainerRef}
-        className="font-primary text-[#101010] fixed left-0 right-0 top-4 z-[999] mt-2 mx-auto w-fit h-10 rounded-full backdrop-blur-sm bg-[#ded9d9] transition-all duration-500 overflow-hidden"
+        className="font-primary text-[#101010] fixed left-0 pe-1 right-0 top-4 z-[999] mt-2 mx-auto w-fit h-10 rounded-full bg-[#ded9d9] transition-all duration-500 overflow-hidden"
       >
         <header className="h-full">
           <nav className="flex h-full items-center">

@@ -134,7 +134,3 @@ html, body {
   cursor: none !important;
 }
 
-/* Allow interactions with clickable elements */
-a, button, [role="button"], input, label, select, textarea, [onclick] {
-  pointer-events: auto;
-}

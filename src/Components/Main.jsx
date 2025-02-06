@@ -21,7 +21,7 @@ const Main = () => {
             <img
               src="/images/profile.jpeg"
               alt="Profile"
-              className="w-20 h-20 rounded-full object-cover border-2 border-[#00c1a1]/20"
+              className="w-15 h-15 rounded-full object-cover border-2 border-[#00c1a1]/20"
             />
             <div className="absolute bottom-0 right-0 w-3 h-3 bg-[#00600e] rounded-full border-2 border-[#171010]"></div>
           </div>
