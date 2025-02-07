@@ -42,13 +42,17 @@ html, body {
 @theme {
   --font-primary: "League Spartan", "serif";
   --font-header: "Vipnagorgialla";
+  --font-general: "general";
   --font-logo: "Lilita One", "serif";
-  --font-typewriter: "bptypewrite";
+  --font-typewriter: "typewriter";
   --font-weight: 300; 
   --color-avocado-100: oklch(0.99 0 0);
 }
 
-
+@font-face{
+  font-family: "general";
+  src: url("/fonts/general.woff2") format(woff2);
+}
 
 @font-face {
   font-family: "Vipnagorgialla";
@@ -65,7 +69,7 @@ html, body {
   src: url("/fonts/LilitaOne-Regular.ttf") format("truetype");
 }
 @font-face{
-  font-family:  "bptypewrite";
+  font-family:  "typewriter";
   font-style: normal;
   font-weight: 200 700;
   font-display: swap;
