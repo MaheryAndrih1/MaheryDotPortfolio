@@ -9,7 +9,7 @@ const App = () => {
       <Cursor />
       <Main />
       <About />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <br /><br />
     </div>
   );
 };

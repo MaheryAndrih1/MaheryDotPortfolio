@@ -5,7 +5,7 @@ import { setCursorHovering } from "./Cursor.jsx";
 
 const Main = () => {
   return (
-    <div className="z-0 h-screen relative overflow-visible">
+    <div className="z-0 relative overflow-visible">
       {/* Logo and Profile section */}
       <div className="w-full flex justify-between items-start pt-5 px-10">
         <h1 className="text-5xl text-white font-logo">
