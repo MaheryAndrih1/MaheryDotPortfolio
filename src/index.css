@@ -47,6 +47,7 @@ html, body {
   --font-typewriter: "typewriter";
   --font-weight: 300; 
   --color-avocado-100: oklch(0.99 0 0);
+  --color-regal-blue: #243c5a; 
 }
 
 @font-face{
