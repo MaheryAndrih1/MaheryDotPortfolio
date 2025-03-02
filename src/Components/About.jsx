@@ -26,9 +26,9 @@ const About = () => {
   };
 
   return (
-    <div id="about" className="bg-black text-white flex flex-col p-8">
+    <div id="about" className="bg-black text-white flex flex-col p-2 md:p-8">
       {/* ABOUT Header */}
-      <div className="text-[48px] md:text-[228px] font-black tracking-[-0.26em] flex ms-5">
+      <div className="text-[128px] md:text-[228px] font-black tracking-[-0.26em] flex justify-center md:justify-start ms-0 md:ms-5">
         <span style={{ color: "#00C1A1" }}>A</span>
         <span style={{ color: "#007070" }}>B</span>
         <span style={{ color: "#B3ECE3" }}>O</span>

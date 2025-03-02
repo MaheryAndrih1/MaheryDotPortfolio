@@ -1,44 +1,129 @@
-import React, { useEffect, useState } from 'react';
-
-const Cursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-
+'use client';
+import { useEffect } from 'react';
+const Cursor = ({ color = '#fff' }) => {
   useEffect(() => {
-    const updateCursor = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    let canvas;
+    let context;
+    let animationFrame;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let cursor = { x: width / 2, y: height / 2 };
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    );
+    class Dot {
+      position;
+      width;
+      lag;
+      constructor(x, y, width, lag) {
+        this.position = { x, y };
+        this.width = width;
+        this.lag = lag;
+      }
+      moveTowards(x, y, context) {
+        this.position.x += (x - this.position.x) / this.lag;
+        this.position.y += (y - this.position.y) / this.lag;
+        context.fillStyle = color;
+        context.beginPath();
+        context.arc(
+          this.position.x,
+          this.position.y,
+          this.width,
+          0,
+          2 * Math.PI
+        );
+        context.fill();
+        context.closePath();
+      }
+    }
+    const dot = new Dot(width / 2, height / 2, 8, 5); 
+    const onMouseMove = (e) => {
+      cursor.x = e.clientX;
+      cursor.y = e.clientY;
     };
-
-    const handleHover = (e) => {
-      setIsHovering(e.detail);
+    const onWindowResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      if (canvas) {
+        canvas.width = width;
+        canvas.height = height;
+      }
     };
-
-    window.addEventListener('mousemove', updateCursor);
-    window.addEventListener('cursorHover', handleHover);
-
+    const updateDot = () => {
+      if (context) {
+        context.clearRect(0, 0, width, height);
+        dot.moveTowards(cursor.x, cursor.y, context);
+      }
+    };
+    const loop = () => {
+      updateDot();
+      animationFrame = requestAnimationFrame(loop);
+    };
+    const init = () => {
+      if (prefersReducedMotion.matches) {
+        console.log('Reduced motion enabled, cursor effect skipped.');
+        return;
+      }
+      canvas = document.createElement('canvas');
+      context = canvas.getContext('2d');
+      
+      
+      const style = document.createElement('style');
+      style.textContent = `
+        body, 
+        a, 
+        button, 
+        [role="button"],
+        [type="button"],
+        [type="submit"],
+        [type="reset"] {
+          cursor: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+      
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.mixBlendMode = 'difference';
+      canvas.style.zIndex = '99999';
+      canvas.width = width;
+      canvas.height = height;
+      
+      // Hide original cursor
+      document.body.style.cursor = 'none';
+      
+      document.body.appendChild(canvas);
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('resize', onWindowResize);
+      loop();
+    };
+    const destroy = () => {
+      if (canvas) {
+        canvas.remove();
+        const style = document.querySelector('style');
+        if (style && style.textContent.includes('cursor: none')) {
+          style.remove();
+        }
+        document.body.style.cursor = 'auto';
+      }
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('resize', onWindowResize);
+    };
+    prefersReducedMotion.onchange = () => {
+      if (prefersReducedMotion.matches) {
+        destroy();
+      } else {
+        init();
+      }
+    };
+    init();
     return () => {
-      window.removeEventListener('mousemove', updateCursor);
-      window.removeEventListener('cursorHover', handleHover);
+      destroy();
     };
-  }, []);
-
-  return (
-    <div 
-      className="cursor-dot mix-blend-difference"
-      style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-      }}
-    >
-      {isHovering && (
-        <span className="cursor-text text-white">Available for work</span>
-      )}
-    </div>
-  );
+  }, [color]);
+  return null;
 };
-
-export const setCursorHovering = (hovering) => {
-  window.dispatchEvent(new CustomEvent('cursorHover', { detail: hovering }));
-};
-
 export default Cursor;
