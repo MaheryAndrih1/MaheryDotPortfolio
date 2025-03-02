@@ -7,9 +7,9 @@ const navItems = ["About", "Work", "Skills"];
 
 const Navbar = () => {
   const navContainerRef = React.useRef(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const { y: currentScrollY } = useWindowScroll();
   useEffect(() => {
@@ -32,40 +32,37 @@ const Navbar = () => {
 
   return (
     <div>
-      {/* Mobile Menu Background and Content */}
-      <div 
-        className={`fixed inset-0 bg-gradient-to-b from-black/90 to-teal-900/30 backdrop-blur-sm transition-all duration-500 md:hidden 
-          ${isMenuOpen ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'}`}
-      >
-        {/* Mobile Menu Items */}
-        <div className="h-full flex flex-col items-center justify-center gap-8 p-6">
+      {/* Mobile Menu */}
+      <div className={`fixed inset-0 bg-black/95 z-[9999] md:hidden transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex flex-col items-center justify-center h-full gap-8">
           {navItems.map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              onClick={() => setIsMenuOpen(false)}
-              className="font-header text-4xl text-white hover:text-teal-500 transition-colors relative group"
+              className={`text-white transition-colors ${
+                item === "About" 
+                  ? "text-4xl font-medium" 
+                  : "text-2xl"
+              } hover:text-[#00c1a1]`}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               {item}
-              <span className="absolute -left-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-teal-500">
-                ✦
-              </span>
             </a>
           ))}
           <a
             href="#contact"
-            onClick={() => setIsMenuOpen(false)}
-            className="font-header text-4xl text-teal-500 hover:text-white transition-colors mt-4"
+            className="text-[#00c1a1] text-2xl hover:text-white transition-colors"
+            onClick={() => setIsMobileMenuOpen(false)}
           >
             Contact
           </a>
         </div>
       </div>
 
-      {/* Existing Navbar */}
+      {/* Navbar */}
       <div
         ref={navContainerRef}
-        className="font-primary text-[#101010] fixed left-0 pe-1 right-0 top-4 z-[9999] mt-2 mx-auto w-fit h-10 rounded-full bg-[#ded9d9] transition-all duration-500 overflow-hidden"
+        className="font-primary text-[#101010] fixed left-0 pe-1 right-0 top-4 z-[9999] rotate-0 mt-2 mx-auto w-fit h-10 rounded-full bg-[#ded9d9] transition-all duration-500 overflow-hidden"
       >
         <header className="h-full">
           <nav className="flex h-full items-center">
@@ -91,9 +88,11 @@ const Navbar = () => {
               {/* Mobile Menu Button */}
               <button
                 className="md:hidden flex items-center px-4"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
-                <span className="text-2xl">☰</span>
+                <span className={`text-2xl transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-90' : ''}`}>
+                  ☰
+                </span>
               </button>
             </div>
           </nav>

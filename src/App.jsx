@@ -1,7 +1,7 @@
 import Main from "./Components/Main";
+import About from "./Components/About";
 import Cursor from "./Components/Cursor";
-import About from "./Components/About"
-import Orbits from "./Components/Orbits"
+import Work from "./Components/Work"; 
 
 const App = () => {
   return (
@@ -9,7 +9,9 @@ const App = () => {
       <Cursor />
       <Main />
       <About />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <br /><br />
+      <Work/>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </div>
   );
 };

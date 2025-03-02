@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar.jsx";
 import Orbits from "./Orbits.jsx";
-import { setCursorHovering } from "./Cursor.jsx";
 
 const Main = () => {
   return (
@@ -12,11 +11,7 @@ const Main = () => {
           M<span className="text-[#00c1a1]">.</span>
         </h1>
         
-        <div
-          className="relative"
-          onMouseEnter={() => setCursorHovering(true)}
-          onMouseLeave={() => setCursorHovering(false)}
-        >
+        <div className="relative">
           <div className="relative">
             <img
               src="/images/profile.jpeg"
@@ -31,13 +26,16 @@ const Main = () => {
       <Navbar />
 
       {/* Main Content Container */}
-      <div className="h-[calc(100vh-120px)] relative flex">
+      <div className="h-[calc(100vh-120px)] md:h-[calc(100vh-120px)] relative flex">
         {/* Vertical Email */}
-        <div
-          onClick={() => window.location.href = "mailto:maheryandrianaivo1@gmail.com"}
-          className="absolute left-10 top-1/2 -translate-y-1/2 writing-mode-vertical transform -rotate-180 text-white/70 text-sm tracking-wider z-20"
-        >
-          maheryandrianaivo1@gmail.com
+        <div className="absolute left-10 top-1/2 -translate-y-1/2 z-50 hidden md:block">
+          <a
+            href="mailto:maheryandrianaivo1@gmail.com"
+            className="block rotate-[-90deg] origin-center text-white/70 text-sm tracking-wider 
+            pointer-events-auto hover:text-[#00c1a1] transition-colors translate-x-[-40%]">
+          
+            maheryandrianaivo1@gmail.com
+          </a>
         </div>
 
         {/* Center Content */}
@@ -50,7 +48,7 @@ const Main = () => {
         </div>
 
         {/* Orbits container */}
-        <div className="absolute bottom-[-20rem] right-0 md:w-1/5">
+        <div className="absolute bottom-[-20rem] right-0 md:w-1/5 hidden md:block">
           <Orbits />
         </div>
       </div>

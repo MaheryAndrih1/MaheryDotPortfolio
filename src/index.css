@@ -5,6 +5,8 @@ body, html {
   margin: 0;
   padding: 0;
   background-color: #000000;
+  overflow-x: hidden;
+  overflow-y: auto; /* Only allow vertical scroll on body */
 }
 
 /* Prevent horizontal scrolling only */
@@ -86,10 +88,6 @@ html, body {
   font-weight: var(--font-weight); 
 }
 
-.writing-mode-vertical {
-  writing-mode: vertical-rl;
-}
-
 .nav-link::after {
   content: '';
   position: absolute;
@@ -108,34 +106,30 @@ html, body {
   opacity: 1;
 }
 
-/* Cursor Styles */
-.cursor-dot {
-  width: 24px;
-  height: 24px;
-  background-color: white;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s;
-  will-change: transform;
+.same-size {
+  width: 350px;
+  height: 250px;
+  object-fit: cover;
 }
 
-/* Cursor Text Styles */
-.cursor-text {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: 14px;
-  font-family: var(--font-typewriter);
-  margin-top: 10px;
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
-/* Hide default cursor everywhere */
-* {
-  cursor: none !important;
+.carousel {
+    animation: scroll 25s linear infinite;
+    width: fit-content;
 }
 
+.carousel.reverse {
+    animation-direction: reverse;
+}
+
+.carousel.paused {
+    animation-play-state: paused;
+}
