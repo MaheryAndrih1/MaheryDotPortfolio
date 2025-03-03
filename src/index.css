@@ -15,6 +15,11 @@ html, body {
   width: 100%;
 }
 
+/* Add this near the top of the file, with other html/body rules */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

@@ -1,7 +1,9 @@
 import Main from "./Components/Main";
 import About from "./Components/About";
 import Cursor from "./Components/Cursor";
-import Work from "./Components/Work"; 
+import Work from "./Components/Work";
+import Skills from "./Components/Skills";
+import Contact from "./Components/Contact" 
 
 const App = () => {
   return (
@@ -11,9 +13,12 @@ const App = () => {
       <About />
       <br /><br />
       <Work/>
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    </div>
+      <Skills/>
+      <Contact/>
+      
+    
+      </div>
   );
 };
-  
+
 export default App;
