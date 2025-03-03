@@ -12,7 +12,7 @@ const Work = () => {
     const [isBottomPaused, setIsBottomPaused] = useState(false);
 
     return (
-        <div id="work" className="min-h-[140vh] bg-[#101010] p-8 overflow-hidden">
+        <div id="work" className="min-h-[140vh] bg-[#101010] p-8 overflow-hidden relative z-[0]">
             <div className="text-[128px] md:text-[86px] font-black tracking-[-0.2em] flex justify-center items-center">
                 <span style={{ color: "#00C1A1" }}>W</span>
                 <span style={{ color: "#007070" }}>O</span>
