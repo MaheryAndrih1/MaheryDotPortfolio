@@ -30,6 +30,15 @@ const Navbar = () => {
     });
   });
 
+  const handleClick = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id.toLowerCase());
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
     <div>
       {/* Mobile Menu */}
@@ -44,7 +53,7 @@ const Navbar = () => {
                   ? "text-4xl font-medium" 
                   : "text-2xl"
               } hover:text-[#00c1a1]`}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => handleClick(e, item)}
             >
               {item}
             </a>
@@ -52,7 +61,7 @@ const Navbar = () => {
           <a
             href="#contact"
             className="text-[#00c1a1] text-2xl hover:text-white transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleClick(e, 'contact')}
           >
             Contact
           </a>
@@ -73,6 +82,7 @@ const Navbar = () => {
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   className="nav-link px-3 text-lg"
+                  onClick={(e) => handleClick(e, item)}
                 >
                   {item}
                 </a>
@@ -84,6 +94,7 @@ const Navbar = () => {
                 id="contact-button"
                 title="Contact"
                 containerClass="bg-[#1d1d1d] md:flex hidden items-center justify-center gap-2 px-1 py-[4px] ml-4"
+                onClick={(e) => handleClick(e, 'contact')}
               />
               {/* Mobile Menu Button */}
               <button
