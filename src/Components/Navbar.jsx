@@ -71,7 +71,7 @@ const Navbar = () => {
       {/* Navbar */}
       <div
         ref={navContainerRef}
-        className="font-primary text-[#101010] fixed left-0 pe-1 right-0 top-4 z-[9999] rotate-0 mt-2 mx-auto w-fit h-10 rounded-full bg-[#ded9d9] transition-all duration-500 overflow-hidden"
+        className="font-primary text-[#101010] fixed left-0 pe-1 right-0 top-4 z-[9999] rotate-0 mt-2 mx-auto w-fit h-10 rounded-full bg-[#ded9d9] transition-all overflow-hidden"
       >
         <header className="h-full">
           <nav className="flex h-full items-center">
@@ -93,7 +93,7 @@ const Navbar = () => {
               <Button
                 id="contact-button"
                 title="Contact"
-                containerClass="bg-[#1d1d1d] md:flex hidden items-center justify-center gap-2 px-1 py-[4px] ml-4"
+                containerClass="bg-[#1d1d1d] md:flex hidden items-center justify-center gap-2 px-1 py-[4px] ml-4 rounded-3xl"
                 onClick={(e) => handleClick(e, 'contact')}
               />
               {/* Mobile Menu Button */}
