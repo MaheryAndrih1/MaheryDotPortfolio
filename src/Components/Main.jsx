@@ -4,7 +4,15 @@ import Orbits from "./Orbits.jsx";
 
 const Main = () => {
   return (
-    <div className="z-0 relative overflow-visible">
+    <div 
+    className="z-0 relative overflow-visible min-h-screen"
+    style={{
+      backgroundImage: 'url("/images/bg1.jpg")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}
+  >
       {/* Logo and Profile section */}
       <div className="w-full flex justify-between items-start pt-5 px-10">
         <h1 className="text-5xl text-white font-logo">
@@ -39,7 +47,7 @@ const Main = () => {
         </div>
 
         {/* Center Content */}
-        <div className="flex-1 flex flex-col items-center justify-center relative z-20">
+        <div className="flex-1 flex flex-col items-center justify-center">
           <p className="font-typewriter text-sm text-white/90 mb-2">You can call me</p>
           <h1 className="font-header text-teal-500 text-7xl md:text-9xl mb-4 mix-blend-exclusion">Mahery</h1>
           <p className="font-typewriter text-center text-white/70 text-base md:text-xl">
