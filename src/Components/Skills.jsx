@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Draggable from 'react-draggable';
-import './Skills.css';
 
 const Skills = () => {
   const [openWindows, setOpenWindows] = useState([]);
   const [isPowered, setIsPowered] = useState(true);
+  const [isStarting, setIsStarting] = useState(false);
   const workAreaRef = useRef(null);
   const [iconPositions, setIconPositions] = useState({});
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -27,6 +27,20 @@ const Skills = () => {
           <li>Container orchestration</li>
           <li>Microservices architecture</li>
           <li>DevOps workflow</li>
+        </ul>
+      </div>
+    },
+    {
+      id: 'android-studio',
+      name: 'Android Studio',
+      icon: '/images/Android Studio.png',
+      content: <div className="p-4">
+        <h3 className="text-xl font-bold mb-2">Android Studio</h3>
+        <p>IDE for Android app development.</p>
+        <ul className="list-disc ml-4 mt-2">
+          <li>Mobile App Development</li>
+          <li>Android SDK</li>
+          <li>Java/Kotlin Development</li>
         </ul>
       </div>
     },
@@ -58,20 +72,7 @@ const Skills = () => {
         </ul>
       </div>
     },
-    {
-      id: 'android-studio',
-      name: 'Android Studio',
-      icon: '/images/Android Studio.png',
-      content: <div className="p-4">
-        <h3 className="text-xl font-bold mb-2">Android Studio</h3>
-        <p>IDE for Android app development.</p>
-        <ul className="list-disc ml-4 mt-2">
-          <li>Mobile App Development</li>
-          <li>Android SDK</li>
-          <li>Java/Kotlin Development</li>
-        </ul>
-      </div>
-    }
+    
   ];
 
   useEffect(() => {
@@ -83,7 +84,7 @@ const Skills = () => {
   }, []);
 
   const formatTime = (date) => {
-    return date.toLocaleTimeString('en-US', { 
+    return date.toLocaleTimeString(undefined, { 
       hour: 'numeric',
       minute: '2-digit',
       hour12: true 
@@ -91,20 +92,20 @@ const Skills = () => {
   };
 
   const formatDate = (date) => {
-    return date.toLocaleDateString('en-US', { 
+    return date.toLocaleDateString(undefined, { 
       month: 'numeric',
       day: 'numeric',
       year: 'numeric'
     });
   };
 
-  // Calculate initial positions in a grid layout
+  
   const getInitialPosition = (index) => {
-    const itemsPerRow = window.innerWidth < 768 ? 2 : 3; // 2 items per row on mobile
-    const horizontalGap = window.innerWidth < 768 ? 100 : 150; // Smaller gap on mobile
-    const verticalGap = window.innerWidth < 768 ? 80 : 120;
-    const startX = window.innerWidth < 768 ? 30 : 50;
-    const startY = window.innerWidth < 768 ? 30 : 50;
+    const itemsPerRow = window.innerWidth < 700 ? 2 : 3; 
+    const horizontalGap = window.innerWidth < 700 ? 50 : 110; 
+    const verticalGap = window.innerWidth < 700 ? 70 : 110;
+    const startX = window.innerWidth < 700 ? 30 : 40;
+    const startY = window.innerWidth < 700 ? 30 : 40;
 
     const row = Math.floor(index / itemsPerRow);
     const col = index % itemsPerRow;
@@ -133,15 +134,23 @@ const Skills = () => {
   };
 
   const togglePower = () => {
-    setIsPowered(!isPowered);
     if (isPowered) {
-      setOpenWindows([]); // Close all windows when turning off
+      setIsPowered(false);
+      setOpenWindows([]);
+    } else {
+      setIsStarting(true);
+      setTimeout(() => {
+        setIsPowered(true);
+        setTimeout(() => {
+          setIsStarting(false);
+        }, 1500);
+      }, 100);
     }
   };
 
   return (
     <div id="skills" className="min-h-screen bg-[#101010] p-8 flex flex-col items-center">
-      <div className="flex items-center gap-8 mb-8">
+      <div className="flex items-center gap-8 mb-4">
         <div className="text-[128px] md:text-[86px] font-black tracking-[-0.2em] flex justify-center items-center">
           <span style={{ color: "#00C1A1" }}>S</span>
           <span style={{ color: "#007070" }}>K</span>
@@ -152,31 +161,40 @@ const Skills = () => {
         </div>
         <button
           onClick={togglePower}
-          className={`w-12 h-12 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${
+          className={`w-12 h-12 rounded-full border-4 ms-10 flex items-center justify-center transition-all duration-500 ${
             isPowered 
               ? 'border-green-500 bg-green-500/20 text-green-500' 
               : 'border-red-500 bg-red-500/20 text-red-500'
           }`}
         >
-          <span className="text-2xl">⏻</span>
+          <img src="/images/power-32.png" alt="" />
         </button>
       </div>
 
+      {/* Note Card */}
+      <div className="max-w-2xl mx-auto mb-8 p-4 bg-[#101010] border border-white/20 rounded-lg">
+        <p className="text-white/80 text-center text-sm md:text-base leading-relaxed">
+          I brought here my most visited place these past few years. You can see here the software I often use, and you can open VScode to see the frameworks and the languages.
+        </p>
+      </div>
+
       {/* Screen Container */}
-      <div className={`relative w-[90vw] h-[100vh] bg-neutral-800 rounded-lg p-2 shadow-2xl transition-all duration-300 ${
-        !isPowered && 'screen-off'
-      }`}>
+      <div className={`relative w-[90vw] h-[100vh] bg-neutral-800 rounded-lg p-2 shadow-2xl transition-all duration-300 
+      ${!isPowered ? 'screen-off' : ''} 
+      ${isStarting ? 'screen-on' : ''}`}
+    >
         {/* Screen Bezel */}
         <div className="absolute inset-2 border-4 border-neutral-700 rounded-lg">
           {/* Screen Content */}
           <div 
             ref={workAreaRef}
-            className="relative w-full h-full overflow-hidden rounded"
+            className={`relative w-full h-full overflow-hidden rounded ${isPowered && !isStarting ? 'crt-flicker' : ''}`}
             style={{
               backgroundImage: isPowered ? 'url("/images/winxp-bg.jpg")' : 'none',
-              backgroundColor: isPowered ? 'transparent' : '#000',
+              backgroundColor: '#000',
               backgroundSize: 'cover',
-              backgroundPosition: 'center'
+              backgroundPosition: 'center',
+              transition: 'background-image 0.5s ease-in'
             }}
           >
             {isPowered && (
@@ -191,13 +209,13 @@ const Skills = () => {
                       onStop={(e, data) => handleIconDrag(app.id, e, data)}
                     >
                       <div 
-                        className="flex flex-col items-center cursor-move absolute"
+                        className="flex flex-col items-center absolute"
                         onDoubleClick={() => openApp(app)}
                       >
                         <img 
                           src={app.icon} 
                           alt={app.name} 
-                          className="w-12 h-12 md:w-16 md:h-16 transition-transform hover:scale-110 pointer-events-none drop-shadow-lg"
+                          className="w-12 h-12 md:w-12 md:h-12 transition-transform hover:scale-110 pointer-events-none drop-shadow-lg"
                         />
                         <span className="text-white text-xs md:text-sm mt-2 text-center pointer-events-none text-shadow px-1 bg-black/30 rounded">
                           {app.name}
@@ -215,7 +233,7 @@ const Skills = () => {
                     bounds="parent"
                     defaultPosition={{ x: 20 + (index * 20), y: 20 + (index * 20) }}
                   >
-                    <div className="absolute top-20 left-20 w-[70%] md:w-[800px] h-[200px] md:h-[500px] bg-[#1E1E1E] rounded-lg shadow-xl border border-gray-700">
+                    <div className="absolute top-20 left-20 w-[70%] md:w-[800px] h-[400px] md:h-[450px] bg-[#1E1E1E] rounded-lg shadow-xl border border-gray-700">
                       <div className="window-handle flex items-center justify-between p-1 md:p-2 bg-[#2D2D2D] rounded-t-lg cursor-move">
                         <div className="flex items-center gap-1 md:gap-2">
                           <img src={app.icon} alt={app.name} className="w-3 h-3 md:w-4 md:h-4" />
@@ -236,7 +254,7 @@ const Skills = () => {
                 ))}
 
                 {/* Windows Taskbar */}
-                <div className="absolute bottom-0 left-0 right-0 h-8 md:h-10 bg-[#1E1E1E]/95 backdrop-blur-sm flex items-center justify-between border-t border-gray-700">
+                <div className="absolute bottom-0 left-0 right-0 h-7 md:h-10 bg-[#1E1E1E]/95 backdrop-blur-sm flex items-center justify-between border-t border-gray-700">
                   {/* Start Button */}
                   <button className="px-2 md:px-4 py-1 text-white hover:bg-white/10">
                     <img src="/images/windows.png" alt="Start" className="w-6 h-6 md:w-8 md:h-8" />
@@ -247,7 +265,7 @@ const Skills = () => {
                     {openWindows.map(app => (
                       <div 
                         key={app.id}
-                        className="flex items-center gap-1 md:gap-2 px-3 md:px-6 py-1 bg-white/10 mr-1 md:mr-2 cursor-pointer hover:bg-white/20"
+                        className="flex items-center gap-1 md:gap-2 px-3 md:px-6 py-2 bg-white/10 mr-1 md:mr-2 cursor-pointer hover:bg-white/20 overflow-hidden"
                       >
                         <img src={app.icon} alt={app.name} className="w-3 h-3 md:w-4 md:h-4" />
                         <span className="text-white text-xs md:text-sm hidden sm:inline">{app.name}</span>
@@ -256,7 +274,7 @@ const Skills = () => {
                   </div>
 
                   {/* Time and Date */}
-                  <div className="flex flex-col items-end text-white text-[10px] md:text-xs px-2 py-1 hover:bg-white/10 cursor-default">
+                  <div className="flex flex-col items-end text-white text-[10px] md:text-xs px-2 md:py-1 hover:bg-white/10 cursor-default">
                     <span>{formatTime(currentTime)}</span>
                     <span>{formatDate(currentTime)}</span>
                   </div>
