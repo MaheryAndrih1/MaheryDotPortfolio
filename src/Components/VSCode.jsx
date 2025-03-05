@@ -135,7 +135,7 @@ const VSCode = () => {
             </div>
             <button 
               onClick={() => setIsPreviewOpen(false)}
-              className="text-white hover:bg-red-600 px-3 py-1"
+              className="text-white hover:bg-red-500 px-3 py-1"
             >
               ✕
             </button>
