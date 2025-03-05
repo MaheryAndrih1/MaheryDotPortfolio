@@ -186,3 +186,9 @@ html {
   backdrop-filter: blur(4px);
   z-index: 40;
 }
+
+/* Add these styles for better mobile menu handling */
+body.no-scroll {
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
