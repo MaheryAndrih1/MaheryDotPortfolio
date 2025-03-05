@@ -209,7 +209,7 @@ const Skills = () => {
         <p className="text-white/80 text-center text-sm md:text-sm leading-relaxed">
           I brought here my most visited place these past few years. You can see
           here the software I often use, and you can open VScode and press Open in Chrome to see my entire tech stack. <br />
-          <span className="text-[#C0C0C080]">(You can modify the html and render it in Chrome)</span>
+          <span className="text-[#C0C0C080]">(You can modify the html and render it in Chrome.)</span>
         </p>
       </div>
 
