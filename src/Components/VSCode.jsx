@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
+import { AiFillCloseSquare } from 'react-icons/ai';
 
 const VSCode = () => {
   const htmlContent = `<!DOCTYPE html>
@@ -137,7 +138,7 @@ const VSCode = () => {
               onClick={() => setIsPreviewOpen(false)}
               className="text-white hover:bg-red-500 px-3 py-1"
             >
-              ✕
+              <AiFillCloseSquare/>
             </button>
           </div>
           
