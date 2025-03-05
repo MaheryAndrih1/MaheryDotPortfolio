@@ -15,6 +15,18 @@ const Skills = () => {
 
   const apps = [
     {
+      id: "cv",
+      name: "CV.pdf",
+      icon: "/images/pdf.png", // Make sure to add a PDF icon to your images folder
+      content: (
+        <iframe
+          src="/CV.pdf" // Add your CV PDF file to the public folder
+          title="CV"
+          className="w-full h-full"
+        />
+      ),
+    },
+    {
       id: "vscode",
       name: "VS Code",
       icon: "/images/vscode.png",
@@ -114,20 +126,42 @@ const Skills = () => {
   };
 
   const getInitialPosition = (index) => {
-    const itemsPerRow = window.innerWidth < 700 ? 2 : 3;
-    const horizontalGap = window.innerWidth < 700 ? 50 : 110;
-    const verticalGap = window.innerWidth < 700 ? 70 : 110;
-    const startX = window.innerWidth < 700 ? 30 : 40;
-    const startY = window.innerWidth < 700 ? 30 : 40;
+    const isMobile = window.innerWidth < 700;
+    const screenWidth = workAreaRef.current ? workAreaRef.current.offsetWidth : window.innerWidth;
+    
+    // Special position for CV
+    if (apps[index].id === "cv") {
+      return {
+        x: isMobile ? screenWidth - 120 : screenWidth - 160,
+        y: 20
+      };
+    }
 
-    const row = Math.floor(index / itemsPerRow);
-    const col = index % itemsPerRow;
+    const adjustedIndex = index - 1;
+    const itemsPerRow = isMobile ? 2 : 3;
+    const horizontalGap = isMobile ? 100 : 110;
+    const verticalGap = isMobile ? 100 : 110;
+    const startX = isMobile ? 20 : 40;
+    const startY = isMobile ? 20 : 40;
+
+    const row = Math.floor(adjustedIndex / itemsPerRow);
+    const col = adjustedIndex % itemsPerRow;
 
     return {
       x: startX + col * horizontalGap,
       y: startY + row * verticalGap,
     };
   };
+
+  // update positions when screen size changes
+  useEffect(() => {
+    const handleResize = () => {
+      setIconPositions({}); 
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const openApp = (app) => {
     if (!openWindows.find((w) => w.id === app.id)) {
@@ -137,7 +171,7 @@ const Skills = () => {
       setGlowingApp(app.id);
       setTimeout(() => {
         setGlowingApp(null);
-      }, 2000); // Duration of glow effect
+      }, 2000);
     }
   };
 
@@ -224,7 +258,7 @@ const Skills = () => {
           {/* Screen Content */}
           <div
             ref={workAreaRef}
-            className={`relative w-full h-full overflow-hidden ${
+            className={`relative w-full h-full ${
               isPowered && !isStarting ? "crt-flicker" : ""
             }`}
             style={{
@@ -235,38 +269,36 @@ const Skills = () => {
               backgroundSize: "cover",
               backgroundPosition: "center",
               transition: "background-image 0.5s ease-in",
+              overflow: "hidden"
             }}
           >
             {isPowered && (
               <>
                 {/* Desktop Icons */}
                 <div className="relative min-h-full">
-                  {apps.map((app, index) => (
-                    <Draggable
-                      key={app.id}
-                      bounds="parent"
-                      nodeRef={nodeRef}
-                      defaultPosition={
-                        iconPositions[app.id] || getInitialPosition(index)
-                      }
-                      onStop={(e, data) => handleIconDrag(app.id, e, data)}
-                    >
+                  {apps.map((app, index) => {
+                    const position = getInitialPosition(index);
+                    return (
                       <div
-                        ref={nodeRef}
+                        key={app.id}
                         className="flex flex-col items-center absolute"
+                        style={{
+                          left: position.x,
+                          top: position.y
+                        }}
                         onDoubleClick={() => openApp(app)}
                       >
                         <img
                           src={app.icon}
                           alt={app.name}
-                          className="w-12 h-12 md:w-12 md:h-12 transition-transform hover:scale-110 pointer-events-none drop-shadow-lg"
+                          className="w-12 h-12 md:w-12 md:h-12 pointer-events-none drop-shadow-lg"
                         />
-                        <span className="text-white text-xs md:text-sm mt-2 text-center pointer-events-none text-shadow px-1 bg-black/30 rounded">
+                        <span className="text-white text-xs md:text-sm mt-2 text-center pointer-events-none px-1 ">
                           {app.name}
                         </span>
                       </div>
-                    </Draggable>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* Windows */}

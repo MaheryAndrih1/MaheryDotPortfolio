@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
-import { AiOutlineClose } from 'react-icons/ai';
+import {AiOutlineClose} from 'react-icons/ai';
+import {BsFiletypeHtml} from 'react-icons/bs';
+
+
 const VSCode = () => {
   const htmlContent = `<!DOCTYPE html>
 <html lang="en">
@@ -33,7 +36,7 @@ const VSCode = () => {
             background: #007070;
             color: white;
             padding: 4px 12px;
-            border-radius: 15px;
+            border-radius: 5px;
             font-size: 14px;
         }
     </style>
@@ -96,7 +99,7 @@ const VSCode = () => {
       {/* Tab Bar with Run Button */}
       <div className="flex justify-between bg-[#252526] px-2">
         <div className="px-3 py-2 text-sm flex items-center gap-2 bg-[#1E1E1E] text-white">
-          <div className="w-2 h-2 rounded-full bg-orange-500" />
+        <BsFiletypeHtml className='h-5 w-5' />
           techstack.html
         </div>
         <button

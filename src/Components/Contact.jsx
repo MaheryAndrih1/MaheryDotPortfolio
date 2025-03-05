@@ -87,7 +87,7 @@ const Contact = () => {
             onChange={handleChange}
             placeholder='Name' 
             required
-            className='text-white mt-5 w-full md:w-xl text-lg bg-transparent border-b border-white outline-none px-2 pb-1 placeholder:absolute placeholder:bottom-1'
+            className='text-white mt-5 w-full md:w-xl text-lg bg-transparent border-b border-white outline-none px-2 flex items-end h-8'
           />
           <input 
             type="email" 
@@ -96,7 +96,7 @@ const Contact = () => {
             onChange={handleChange}
             placeholder='Email' 
             required
-            className='text-white mt-5 w-full md:w-xl text-lg bg-transparent border-b border-white outline-none px-2 pb-1 placeholder:absolute placeholder:bottom-1'
+            className='text-white mt-5 w-full md:w-xl text-lg bg-transparent border-b border-white outline-none px-2 flex items-end h-8'
           />
           <textarea 
             name="message"
@@ -104,7 +104,7 @@ const Contact = () => {
             onChange={handleChange}
             placeholder='Message' 
             required
-            className='text-white mt-12 w-full md:w-xl min-h-[100px] text-lg bg-transparent border-b border-white outline-none px-2 pb-1 resize-none placeholder:absolute placeholder:bottom-1'
+            className='text-white mt-12 w-full md:w-xl min-h-[100px] text-lg bg-transparent border-b border-white outline-none px-2 resize-none flex items-end pt-[70px]'
           />
           <Button 
             title={
