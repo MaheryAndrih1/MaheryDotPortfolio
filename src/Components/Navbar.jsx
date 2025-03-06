@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "./Button";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineCiCircle, AiOutlineClose, AiOutlineEye, AiOutlineInfoCircle, AiOutlineMenu, AiOutlineMenuFold, AiOutlineMenuUnfold, AiOutlineShake } from "react-icons/ai";
 
 const navItems = ["About", "Work", "Skills"];
 
@@ -63,7 +63,7 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Navbar */}
-      <div className="font-primary text-[#101010] pe-1 mx-auto w-fit h-10 rounded-full bg-[#ded9d9] -translate-y-14">
+      <div className="font-primary text-[#101010] pe-1 mx-auto w-fit h-10 rounded-full bg-[#ded9d9] -translate-y-11">
         <header className="h-full">
           <nav className="flex h-full items-center">
             {/* Desktop Navigation */}
@@ -89,12 +89,12 @@ const Navbar = () => {
               />
               {/* Mobile Menu Button */}
               <button
-                className="md:hidden flex items-center px-4"
+                className="md:hidden flex items-center px-4 rounded"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
-                <span className={`text-2xl transition-transform duration-300 ${
+                <span className={`text-lg md:text-2xl transition-transform duration-300 ${
                   isMobileMenuOpen ? 'rotate-90' : ''
-                }`}><AiOutlineMenu/></span>
+                }`}>Menu</span>
               </button>
             </div>
           </nav>
@@ -120,7 +120,7 @@ const Navbar = () => {
               key={item}
               href={`#${item.toLowerCase()}`}
               onClick={(e) => handleClick(e, item)}
-              className="text-white text-3xl font-primary tracking-wide hover:text-[#00C1A1] transition-colors duration-300"
+              className="text-white text-3xl font-primary tracking-wide hover:text-[#37AAA4] transition-colors duration-300"
             >
               {item}
             </a>

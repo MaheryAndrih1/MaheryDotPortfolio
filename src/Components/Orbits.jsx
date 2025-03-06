@@ -78,7 +78,10 @@ const Orbits = () => {
           >
             <div 
               ref={dot1Ref}
-              className={`w-20 h-20 ${isColliding1 ? 'bg-teal-100/90 mix-blend-screen backdrop-blur-md' : 'bg-teal-500'} rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-colors duration-300`}
+              className={`w-20 h-20 ${isColliding1 ? 'mix-blend-screen backdrop-blur-md' : ''} rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-colors duration-500`}
+              style={{ 
+                backgroundColor: isColliding1 ? 'var(--color-gray-light)' : 'var(--color-secondary)'
+              }}
             ></div>
           </motion.div>
 
@@ -89,7 +92,10 @@ const Orbits = () => {
           >
             <div 
               ref={dot2Ref}
-              className={`w-12 h-12 ${isColliding2 ? 'bg-teal-100/90 mix-blend-screen backdrop-blur-md' : 'bg-teal-800'} rounded-full absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 transition-colors duration-300`}
+              className={`w-12 h-12 ${isColliding2 ? 'mix-blend-screen backdrop-blur-md' : ''} rounded-full absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 transition-colors duration-500`}
+              style={{ 
+                backgroundColor: isColliding2 ? 'var(--color-purple-light)' : 'var(--color-purple)'
+              }}
             ></div>
           </motion.div>
         </div>
@@ -102,7 +108,10 @@ const Orbits = () => {
           >
             <div 
               ref={dot3Ref}
-              className={`w-6 h-6 ${isColliding3 ? 'bg-teal-100/90 mix-blend-screen backdrop-blur-md' : 'bg-teal-400'} rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-colors duration-300`}
+              className={`w-6 h-6 ${isColliding3 ? 'mix-blend-screen backdrop-blur-md' : ''} rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-colors duration-500`}
+              style={{ 
+                backgroundColor: isColliding3 ? 'var(--color-gray-light)' : 'var(--color-teal)'
+              }}
             ></div>
           </motion.div>
         </div>

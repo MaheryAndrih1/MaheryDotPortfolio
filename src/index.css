@@ -6,16 +6,15 @@ body, html {
   padding: 0;
   background-color: #000000;
   overflow-x: hidden;
-  overflow-y: auto; /* Only allow vertical scroll on body */
+  overflow-y: auto; 
 }
 
-/* Prevent horizontal scrolling only */
 html, body {
   overflow-x: hidden;
   width: 100%;
 }
 
-/* Add this near the top of the file, with other html/body rules */
+
 html {
   scroll-behavior: smooth;
 }
@@ -27,7 +26,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00c1a1;
+  background: #059669;
   border-radius: 10px;
 }
 
@@ -43,7 +42,7 @@ html {
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #00c1a1 #101010;
+  scrollbar-color: #059669 #101010;
 }
 
 @theme {
@@ -55,6 +54,21 @@ html {
   --font-weight: 300; 
   --color-avocado-100: oklch(0.99 0 0);
   --color-regal-blue: #243c5a; 
+
+  /* Colors */
+  --color-primary: #05895c;
+  --color-secondary: #07aa7c;
+  --color-gray: #579089;
+  --color-teal: #109481;
+  --color-purple: #707cd0;
+  
+  /* Color variants */
+  --color-primary-light: #05895c99;
+  --color-secondary-light: #07aa7c99;
+  --color-gray-light: #57908999;
+  --color-teal-light: #10948199;
+  --color-purple-light: #707cd099;
+  --color-yellow: #D6FF62;
 }
 
 @font-face{
@@ -125,7 +139,6 @@ html {
 .carousel-track {
   display: flex;
   gap: 4px;
-  /* Make sure all images fit in view */
   width: calc(50vh * 8);  /* 8 images total (4 original + 4 duplicates) */
   animation: scroll 20s linear infinite;
 }
@@ -135,7 +148,6 @@ html {
       transform: translateX(0);
   }
   100% {
-      /* Move exactly one set of images */
       transform: translateX(-50%);
   }
 }
@@ -171,7 +183,7 @@ html {
   animation: taskbar-glow 1s ease-in-out 2;
 }
 
-/* Add these styles for the Chrome window overlay */
+
 .chrome-overlay {
   position: fixed;
   top: 0;
@@ -183,7 +195,7 @@ html {
   z-index: 40;
 }
 
-/* Add these styles for better mobile menu handling */
+/* mobile menu handling */
 body.no-scroll {
   overflow: hidden;
   -webkit-overflow-scrolling: touch;

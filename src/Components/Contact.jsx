@@ -46,22 +46,14 @@ const Contact = () => {
   return (
     <div id="contact" className="min-h-screen flex flex-col items-center justify-between">
       <div className="text-[128px] md:text-[86px] font-black tracking-[-0.2em] flex justify-center items-center">
-                <span style={{ color: "#00C1A1" }}>C</span>
-                <span style={{ color: "#007070" }}>O</span>
-                <span style={{ color: "#B3ECE3" }}>N</span>
-                <span style={{ color: "#00C1A1" }}>T</span>
-                <span style={{ color: "#007070" }}>A</span>
-                <span style={{ color: "#00C1A1" }}>C</span>
-                <span style={{ color: "#00C1A1" }}>T</span>
+        <span style={{ color: "var(--color-primary)" }}>C</span>
+        <span style={{ color: "var(--color-secondary)" }}>O</span>
+        <span style={{ color: "var(--color-gray)" }}>N</span>
+        <span style={{ color: "var(--color-teal)" }}>T</span>
+        <span style={{ color: "var(--color-gray)" }}>A</span>
+        <span style={{ color: "var(--color-primary)" }}>C</span>
+        <span style={{ color: "var(--color-secondary)" }}>T</span>
       </div>
-      <Button 
-        title={<>
-          <span className="text-white">Call me on </span>
-          <span>Whatsapp</span>
-        </>}
-        containerClass="bg-[#1d1d1d] py-3 "
-        onClick={() => window.open('https://wa.me/+261386084355', '_blank')}
-      />
 
       <div className="flex items-center justify-center gap-8 mt-8">
         <a href="https://linkedin.com/in/maheriniaina-andrianaivo/" target="_blank" rel="noreferrer">

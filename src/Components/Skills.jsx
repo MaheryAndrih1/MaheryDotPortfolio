@@ -17,10 +17,10 @@ const Skills = () => {
     {
       id: "cv",
       name: "CV.pdf",
-      icon: "/images/pdf.png", // Make sure to add a PDF icon to your images folder
+      icon: "/images/pdf.png",
       content: (
         <iframe
-          src="/CV.pdf" // Add your CV PDF file to the public folder
+          src="/CV.pdf" 
           title="CV"
           className="w-full h-full"
         />
@@ -128,12 +128,13 @@ const Skills = () => {
   const getInitialPosition = (index) => {
     const isMobile = window.innerWidth < 700;
     const screenWidth = workAreaRef.current ? workAreaRef.current.offsetWidth : window.innerWidth;
+    const screenHeight = workAreaRef.current ? workAreaRef.current.offsetHeight : window.innerHeight;
     
-    // Special position for CV
+    // position for CV
     if (apps[index].id === "cv") {
       return {
-        x: isMobile ? screenWidth - 120 : screenWidth - 160,
-        y: 20
+        x: isMobile ? screenWidth - 70 : screenWidth - 90,
+        y: isMobile ? screenHeight - 537 : screenHeight - 543,
       };
     }
 
@@ -215,22 +216,22 @@ const Skills = () => {
   return (
     <div
       id="skills"
-      className="min-h-screen bg-[#101010] p-8 flex flex-col items-center"
+      className="min-h-screen border-regal-blue p-8 flex flex-col items-center"
     >
       <div className="flex items-center gap-8 mb-4">
         <div className="text-[128px] md:text-[86px] font-black tracking-[-0.2em] flex justify-center items-center">
-          <span style={{ color: "#00C1A1" }}>S</span>
-          <span style={{ color: "#007070" }}>K</span>
-          <span style={{ color: "#B3ECE3" }}>I</span>
-          <span style={{ color: "#00C1A1" }}>L</span>
-          <span style={{ color: "#007070" }}>L</span>
-          <span style={{ color: "#00C1A1" }}>S</span>
+          <span style={{ color: "var(--color-primary)" }}>S</span>
+          <span style={{ color: "var(--color-secondary)" }}>K</span>
+          <span style={{ color: "var(--color-gray)" }}>I</span>
+          <span style={{ color: "var(--color-teal)" }}>L</span>
+          <span style={{ color: "var(--color-purple)" }}>L</span>
+          <span style={{ color: "var(--color-secondary)" }}>S</span>
         </div>
         <button
           onClick={togglePower}
           className={`w-12 h-12 rounded-full border-4 ms-10 flex items-center justify-center transition-all duration-500 ${
             isPowered
-              ? "border-green-500 bg-green-500/20 text-green-500"
+              ? "border-secondary bg-secondary/20 text-secondary"
               : "border-red-500 bg-red-500/20 text-red-500"
           }`}
         >
@@ -239,11 +240,10 @@ const Skills = () => {
       </div>
 
       {/* Note Card */}
-      <div className="max-w-2xl mx-auto mb-8 p-4 bg-[#101010] border border-white/20 rounded-lg">
+      <div className="max-w-2xl mx-auto mb-8 p-4 bg-[#101010] border border-primary/20 rounded-lg">
         <p className="text-white/80 text-center text-sm md:text-sm leading-relaxed">
-          I brought here my most visited place these past few years. You can see
-          here the software I often use, and you can open VScode and press Open in Chrome to see my entire tech stack. <br />
-          <span className="text-[#C0C0C080]">(You can modify the html and render it in Chrome.)</span>
+          I brought here my desktop. Here are the software I often use, you can open VScode and press "Open in Chrome" to see my entire tech stack. <br />
+          <span className="text-gray/70">(You can modify the html and render it in Chrome.)</span>
         </p>
       </div>
 
