@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Reset default margins */
 body, html {
   margin: 0;
   padding: 0;
@@ -203,7 +202,7 @@ html {
   pointer-events: auto !important;
 }
 
-/* Make sure navbar buttons are clickable */
+/* navbar buttons*/
 .navbar-container a,
 .navbar-container button {
   pointer-events: auto !important;
@@ -211,32 +210,27 @@ html {
   z-index: 999999 !important;
 }
 
-/* Override any other z-index that might interfere */
 .window-container {
   z-index: 10;
   position: relative;
   z-index: 5;
 }
 
-/* Add a base stacking context for main sections */
 #main, #about, #work, #skills, #contact {
   position: relative !important;
   z-index: 1 !important;
 }
 
-/* Give higher z-index to the VSCode windows to ensure they're above skills section */
 .window-container, .screen-container {
   position: relative;
   z-index: 5;
 }
 
-/* mobile menu handling */
 body.no-scroll {
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Z-index management - extreme values to ensure proper stacking */
 .navbar-wrapper {
   position: fixed !important;
   width: 100%;
@@ -246,12 +240,10 @@ body.no-scroll {
   pointer-events: none;
 }
 
-/* Additional specific positioning for Skills section */
 #skills {
-  padding-top: 10rem !important; /* Extra padding to ensure content doesn't get hidden under navbar */
+  padding-top: 10rem !important; 
 }
 
-/* Mobile menu specific styles */
 .navbar-wrapper .fixed {
   pointer-events: auto !important;
 }
@@ -262,12 +254,6 @@ body.no-scroll {
   cursor: pointer !important;
 }
 
-/* When mobile menu is open, ensure proper stacking and interactions */
 body.no-scroll .navbar-wrapper {
   z-index: 9999999 !important;
-}
-
-/* Fix for Cursor component interaction with navbar */
-canvas {
-  pointer-events: none !important;
 }

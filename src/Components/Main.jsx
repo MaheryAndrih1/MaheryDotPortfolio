@@ -11,7 +11,7 @@ const Main = () => {
       setCurrentTime(new Date());
     }, 1000);
 
-    // Simplified location detection
+    // location detection
     fetch('https://ipapi.co/json/')
       .then(response => response.json())
       .then(data => {
@@ -52,7 +52,7 @@ const Main = () => {
           <a
             href="mailto:maheryandrianaivo1@gmail.com"
             className="block rotate-[-90deg] origin-center text-white/70 text-sm tracking-wider 
-            pointer-events-auto hover:text-[#37AAA4] transition-colors translate-x-[-40%]">
+            pointer-events-auto hover:text-[#37AAA4] transition-colors translate-x-[-45%] translate-y-10">
           
             maheryandrianaivo1@gmail.com
           </a>

@@ -114,7 +114,7 @@ const Navbar = () => {
                   containerClass="bg-[#1d1d1d] md:flex hidden items-center justify-center gap-2 px-1 py-[4px] ml-4 rounded-3xl"
                   onClick={(e) => handleClick(e, 'contact')}
                 />
-                {/* Mobile Menu Button - hide when menu is open */}
+                {/* Mobile Menu Button */}
                 {!isMobileMenuOpen && (
                   <button
                     className="md:hidden flex items-center px-4 rounded" 
@@ -129,7 +129,7 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Mobile Menu Overlay - only render when open */}
+      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div
           className="fixed inset-0 bg-black backdrop-blur-sm z-[9999]"

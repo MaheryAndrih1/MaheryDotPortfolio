@@ -106,7 +106,7 @@ const VSCode = () => {
           onClick={handleRun}
           className="px-4 py-1 my-1 flex items-center gap-2 rounded bg-blue-600 hover:bg-blue-700 text-white"
         >
-          <span className="text-sm">Open in Chrome</span>
+          <span className="text-sm">Render</span>
         </button>
       </div>
 

@@ -12,6 +12,7 @@ const Skills = () => {
   const [iconPositions, setIconPositions] = useState({});
   const [currentTime, setCurrentTime] = useState(new Date());
   const [glowingApp, setGlowingApp] = useState(null);
+  const iconRefs = useRef({});
 
   const apps = [
     {
@@ -142,8 +143,8 @@ const Skills = () => {
     const itemsPerRow = isMobile ? 2 : 3;
     const horizontalGap = isMobile ? 100 : 110;
     const verticalGap = isMobile ? 100 : 110;
-    const startX = isMobile ? 20 : 40;
-    const startY = isMobile ? 20 : 40;
+    let startX = isMobile ? 20 : 40;
+    let startY = isMobile ? 20 : 40;
 
     const row = Math.floor(adjustedIndex / itemsPerRow);
     const col = adjustedIndex % itemsPerRow;
@@ -168,7 +169,7 @@ const Skills = () => {
     if (!openWindows.find((w) => w.id === app.id)) {
       setOpenWindows([...openWindows, app]);
     } else if (minimizedWindows.includes(app.id)) {
-      // Trigger glow effect
+      restoreWindow(app.id);
       setGlowingApp(app.id);
       setTimeout(() => {
         setGlowingApp(null);
@@ -195,6 +196,22 @@ const Skills = () => {
     }));
   };
 
+  const restrictToBounds = (newX, newY, iconWidth = 80, iconHeight = 80) => {
+    // Get the current work area dimensions
+    const workArea = workAreaRef.current;
+    if (!workArea) return { x: newX, y: newY };
+    
+    const bounds = workArea.getBoundingClientRect();
+    const padding = 10; // to avoid getting too close to the edge
+    
+    const restrictedX = Math.max(padding, Math.min(newX, bounds.width - iconWidth - padding));
+    const restrictedY = Math.max(padding, Math.min(newY, bounds.height - iconHeight - padding));
+    
+    return { x: restrictedX, y: restrictedY };
+  };
+
+
+
   const togglePower = () => {
     if (isPowered) {
       setIsPowered(false);
@@ -217,7 +234,7 @@ const Skills = () => {
     <div
       id="skills"
       className="relative min-h-screen border-regal-blue p-8 flex flex-col items-center pt-32"
-      style={{ zIndex: 1 }} // Lower the Skills section z-index
+      style={{ zIndex: 1 }}
     >
       <div className="flex items-center gap-8 mb-4">
         <div className="text-[128px] md:text-[86px] font-black tracking-[-0.2em] flex justify-center items-center">
@@ -243,7 +260,7 @@ const Skills = () => {
       {/* Note Card */}
       <div className="max-w-2xl mx-auto mb-8 p-4 bg-[#101010] border border-primary/20 rounded-lg">
         <p className="text-white/80 text-center text-sm md:text-sm leading-relaxed">
-          I brought here my desktop. Here are the software I often use, you can open VScode and press "Open in Chrome" to see my entire tech stack. <br />
+          I brought here my desktop. Here are the software I often use, you can open VScode and press "Render" to see my entire tech stack. <br />
           <span className="text-gray/70">(You can modify the html and render it in Chrome.)</span>
         </p>
       </div>
@@ -279,22 +296,69 @@ const Skills = () => {
                 <div className="relative min-h-full">
                   {apps.map((app, index) => {
                     const position = getInitialPosition(index);
+                    if (!iconRefs.current[app.id]) {
+                      iconRefs.current[app.id] = React.createRef();
+                    }
+
                     return (
                       <div
                         key={app.id}
-                        className="flex flex-col items-center absolute"
+                        ref={iconRefs.current[app.id]}
+                        className="flex flex-col items-center absolute cursor-pointer"
                         style={{
-                          left: position.x,
-                          top: position.y
+                          left: iconPositions[app.id]?.x || position.x,
+                          top: iconPositions[app.id]?.y || position.y,
+                          width: '80px',
+                          height: '80px',
                         }}
                         onDoubleClick={() => openApp(app)}
+                        onMouseDown={(e) => {
+                          // dragging if not double click
+                          const startTime = Date.now();
+                          const startX = e.clientX;
+                          const startY = e.clientY;
+                          
+                          const onMouseMove = (moveEvent) => {
+                            if (Date.now() - startTime < 300) return;
+                            
+                            const dx = moveEvent.clientX - startX;
+                            const dy = moveEvent.clientY - startY;
+                            
+                            if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+                              // dragging update position
+                              const currentPos = iconPositions[app.id] || position;
+                              const newX = currentPos.x + dx;
+                              const newY = currentPos.y + dy;
+                              
+                              // Apply boundary
+                              const restricted = restrictToBounds(newX, newY);
+                              
+                              setIconPositions((prev) => ({
+                                ...prev,
+                                [app.id]: restricted
+                              }));
+                              
+                              
+                              startX = moveEvent.clientX;
+                              startY = moveEvent.clientY;
+                            }
+                          };
+                          
+                          const onMouseUp = () => {
+                            document.removeEventListener('mousemove', onMouseMove);
+                            document.removeEventListener('mouseup', onMouseUp);
+                          };
+                          
+                          document.addEventListener('mousemove', onMouseMove);
+                          document.addEventListener('mouseup', onMouseUp);
+                        }}
                       >
                         <img
                           src={app.icon}
                           alt={app.name}
                           className="w-12 h-12 md:w-12 md:h-12 pointer-events-none drop-shadow-lg"
                         />
-                        <span className="text-white text-xs md:text-sm mt-2 text-center pointer-events-none px-1 ">
+                        <span className="text-white text-xs md:text-sm mt-2 text-center pointer-events-none px-1">
                           {app.name}
                         </span>
                       </div>
