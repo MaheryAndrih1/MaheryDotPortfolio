@@ -216,7 +216,8 @@ const Skills = () => {
   return (
     <div
       id="skills"
-      className="min-h-screen border-regal-blue p-8 flex flex-col items-center"
+      className="relative min-h-screen border-regal-blue p-8 flex flex-col items-center pt-32"
+      style={{ zIndex: 1 }} // Lower the Skills section z-index
     >
       <div className="flex items-center gap-8 mb-4">
         <div className="text-[128px] md:text-[86px] font-black tracking-[-0.2em] flex justify-center items-center">

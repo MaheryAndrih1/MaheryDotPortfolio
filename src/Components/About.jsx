@@ -21,7 +21,7 @@ const About = () => {
       <div className="text-[110px] md:text-[142px] font-black tracking-[-0.26em] flex justify-center md:justify-start ms-0 md:ms-5 h-40 md:h-64">
         <span className="text-primary">A</span>
         <span className="text-teal-900">B</span>
-        <span className="text-gray md:text-[260px] text-[200px] -translate-y-20 md:-translate-y-28">●</span>
+        <span className="text-gray">O</span>
         <span className="text-primary">U</span>
         <span className="text-secondary">T</span>
       </div>

@@ -89,7 +89,7 @@ const Work = () => {
             
             <div className="text-[128px] md:text-[86px] font-black tracking-[-0.3em] flex justify-center items-center h-10">
                 <span style={{ color: "var(--color-primary)" }}>W</span>
-                <span className="text-purple md:text-[165px] text-[235px] -translate-y-5 md:-translate-y-5">●</span>
+                <span className="text-purple">O</span>
                 <span style={{ color: "var(--color-gray)" }}>R</span>
                 <span style={{ color: "var(--color-teal)" }}>K</span>
             </div>

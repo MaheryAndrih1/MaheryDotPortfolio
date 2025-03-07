@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar.jsx";
 import Orbits from "./Orbits.jsx";
 
 const Main = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [countryCode, setCountryCode] = useState('MG');
+  const [countryCode, setCountryCode] = useState('');
 
   useEffect(() => {
     // Time update
@@ -12,23 +11,15 @@ const Main = () => {
       setCurrentTime(new Date());
     }, 1000);
 
-    // Location detection
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        try {
-          const response = await fetch(
-            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`
-          );
-          const data = await response.json();
-          setCountryCode(data.countryCode || 'MG');
-        } catch (error) {
-          // console.log('Error getting location:', error);
-          setCountryCode('MG');
+    // Simplified location detection
+    fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.country_code) {
+          setCountryCode(data.country_code);
         }
-      }, () => {
-        setCountryCode('MG');
-      });
-    }
+      })
+      
 
     return () => clearInterval(timer);
   }, []);
@@ -54,10 +45,8 @@ const Main = () => {
         </div>
       </div>
 
-      <Navbar />
-
       {/* Main Content Container */}
-      <div className="h-[calc(100vh-120px)] md:h-[calc(100vh-175px)] relative flex">
+      <div className="h-[calc(100vh-120px)] md:h-[calc(100vh-175px)] relative flex pt-20">
         {/* Vertical Email */}
         <div className="absolute left-10 top-1/2 -translate-y-1/2 z-50 hidden md:block">
           <a

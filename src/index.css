@@ -59,6 +59,7 @@ html {
   --color-primary: #05895c;
   --color-secondary: #07aa7c;
   --color-gray: #579089;
+  --color-real-gray: #ded9d9;
   --color-teal: #109481;
   --color-purple: #707cd0;
   
@@ -195,8 +196,78 @@ html {
   z-index: 40;
 }
 
+/* Z-index management */
+.navbar-container {
+  z-index: 999999 !important;
+  position: fixed !important;
+  pointer-events: auto !important;
+}
+
+/* Make sure navbar buttons are clickable */
+.navbar-container a,
+.navbar-container button {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 999999 !important;
+}
+
+/* Override any other z-index that might interfere */
+.window-container {
+  z-index: 10;
+  position: relative;
+  z-index: 5;
+}
+
+/* Add a base stacking context for main sections */
+#main, #about, #work, #skills, #contact {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Give higher z-index to the VSCode windows to ensure they're above skills section */
+.window-container, .screen-container {
+  position: relative;
+  z-index: 5;
+}
+
 /* mobile menu handling */
 body.no-scroll {
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Z-index management - extreme values to ensure proper stacking */
+.navbar-wrapper {
+  position: fixed !important;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999999 !important;
+  pointer-events: none;
+}
+
+/* Additional specific positioning for Skills section */
+#skills {
+  padding-top: 10rem !important; /* Extra padding to ensure content doesn't get hidden under navbar */
+}
+
+/* Mobile menu specific styles */
+.navbar-wrapper .fixed {
+  pointer-events: auto !important;
+}
+
+.navbar-wrapper button,
+.navbar-wrapper a {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* When mobile menu is open, ensure proper stacking and interactions */
+body.no-scroll .navbar-wrapper {
+  z-index: 9999999 !important;
+}
+
+/* Fix for Cursor component interaction with navbar */
+canvas {
+  pointer-events: none !important;
 }

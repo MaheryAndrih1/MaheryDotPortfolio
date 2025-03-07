@@ -87,7 +87,7 @@ const Cursor = ({ color = '#fff' }) => {
       canvas.style.left = '0';
       canvas.style.pointerEvents = 'none';
       canvas.style.mixBlendMode = 'difference';
-      canvas.style.zIndex = '99999';
+      canvas.style.zIndex = '9999999'; // Super high z-index value to always be on top
       canvas.width = width;
       canvas.height = height;
       
