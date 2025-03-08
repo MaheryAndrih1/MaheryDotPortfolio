@@ -53,7 +53,7 @@ const Orbits = () => {
 
   const [t, setT] = useState(0);
   useAnimationFrame((time) => {
-    setT(time / 19); // faster base speed
+    setT(time / 19); // speed
   });
 
   return (

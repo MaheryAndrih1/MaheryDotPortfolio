@@ -1,23 +1,25 @@
+import React from "react";
+import Navbar from "./UI/Navbar";
 import Main from "./Components/Main";
 import About from "./Components/About";
-import Cursor from "./Components/Cursor";
+import Cursor from "./UI/Cursor"; // Updated import path
 import Work from "./Components/Work";
 import Skills from "./Components/Skills";
 import Contact from "./Components/Contact";
-import Navbar from "./Components/Navbar";
+import "./App.css";
 
-const App = () => {
+function App() {
   return (
-    <div className="bg-[#000000] min-h-screen w-full">
+    <div className="App bg-[#101010] min-h-screen">
       <Cursor />
-      <Navbar /> 
+      <Navbar />
       <Main />
       <About />
-      <Work/>
-      <Skills/>
-      <Contact/>
+      <Work />
+      <Skills />
+      <Contact />
     </div>
   );
-};
+}
 
 export default App;

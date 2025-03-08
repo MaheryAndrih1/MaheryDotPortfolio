@@ -1,30 +1,27 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { AiOutlineClose, AiOutlineMinus } from "react-icons/ai";
 import VSCode from './VSCode';
+import { usePower } from "./PowerButton";
 
 const Pc = () => {
-  const [openWindows, setOpenWindows] = useState([]);
+  // Get shared state from context
+  const { 
+    isPowered, 
+    isStarting, 
+    openWindows, 
+    setOpenWindows 
+  } = usePower();
+  
+  // Local state
   const [minimizedWindows, setMinimizedWindows] = useState([]);
-  const [isPowered, setIsPowered] = useState(true);
-  const [isStarting, setIsStarting] = useState(false);
   const workAreaRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [glowingApp, setGlowingApp] = useState(null);
+  const [iconPositions, setIconPositions] = useState({});
+  const appIconRefs = useRef({});
 
   const apps = [
-    {
-      id: "cv",
-      name: "CV.pdf",
-      icon: "/images/pdf.png",
-      content: (
-        <iframe
-          src="/CV.pdf" 
-          title="CV"
-          className="w-full h-full"
-        />
-      ),
-    },
     {
       id: "vscode",
       name: "VS Code",
@@ -51,22 +48,6 @@ const Pc = () => {
       ),
     },
     {
-      id: "android-studio",
-      name: "Android Studio",
-      icon: "/images/Android Studio.png",
-      content: (
-        <div className="p-4">
-          <h3 className="text-xl font-bold mb-2">Android Studio</h3>
-          <p>IDE for Android app development.</p>
-          <ul className="list-disc ml-4 mt-2">
-            <li>Mobile App Development</li>
-            <li>Android SDK</li>
-            <li>Java/Kotlin Development</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
       id: "figma",
       name: "Figma",
       icon: "/images/figma.png",
@@ -78,6 +59,22 @@ const Pc = () => {
             <li>UI/UX Design</li>
             <li>Prototyping</li>
             <li>Design Systems</li>
+          </ul>
+        </div>
+      ),
+    },
+    {
+      id: "android-studio",
+      name: "Android Studio",
+      icon: "/images/Android Studio.png",
+      content: (
+        <div className="p-4">
+          <h3 className="text-xl font-bold mb-2">Android Studio</h3>
+          <p>IDE for Android app development.</p>
+          <ul className="list-disc ml-4 mt-2">
+            <li>Mobile App Development</li>
+            <li>Android SDK</li>
+            <li>Java/Kotlin Development</li>
           </ul>
         </div>
       ),
@@ -96,6 +93,18 @@ const Pc = () => {
             <li>Request Collection Management</li>
           </ul>
         </div>
+      ),
+    },
+    {
+      id: "cv",
+      name: "CV.pdf",
+      icon: "/images/pdf.png",
+      content: (
+        <iframe
+          src="/CV.pdf" 
+          title="CV"
+          className="w-full h-full"
+        />
       ),
     },
   ];
@@ -129,23 +138,14 @@ const Pc = () => {
     const screenWidth = workAreaRef.current ? workAreaRef.current.offsetWidth : window.innerWidth;
     const screenHeight = workAreaRef.current ? workAreaRef.current.offsetHeight : window.innerHeight;
     
-    // position for CV
-    if (apps[index].id === "cv") {
-      return {
-        x: isMobile ? screenWidth - 70 : screenWidth - 90,
-        y: screenHeight - 500,
-      };
-    }
+    const itemsPerRow = isMobile ? 2 : 4; 
+    const horizontalGap = isMobile ? 80 : 90; 
+    const verticalGap = isMobile ? 80 : 90; 
+    const startX = isMobile ? 10 : 30;
+    const startY = isMobile ? 20 : 30;
 
-    const adjustedIndex = index - 1;
-    const itemsPerRow = isMobile ? 2 : 3;
-    const horizontalGap = isMobile ? 100 : 110;
-    const verticalGap = isMobile ? 100 : 110;
-    const startX = isMobile ? 20 : 40;
-    const startY = isMobile ? 20 : 40;
-
-    const row = Math.floor(adjustedIndex / itemsPerRow);
-    const col = adjustedIndex % itemsPerRow;
+    const row = Math.floor(index / itemsPerRow);
+    const col = index % itemsPerRow;
 
     return {
       x: startX + col * horizontalGap,
@@ -162,6 +162,13 @@ const Pc = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleIconDrag = (appId, data) => {
+    setIconPositions(prev => ({
+      ...prev,
+      [appId]: { x: data.x, y: data.y }
+    }));
+  };
 
   const openApp = (app) => {
     if (!openWindows.find((w) => w.id === app.id)) {
@@ -186,38 +193,10 @@ const Pc = () => {
     setMinimizedWindows(minimizedWindows.filter((id) => id !== appId));
   };
 
-  const togglePower = () => {
-    if (isPowered) {
-      setIsPowered(false);
-      setOpenWindows([]);
-    } else {
-      setIsStarting(true);
-      setTimeout(() => {
-        setIsPowered(true);
-        setTimeout(() => {
-          setIsStarting(false);
-        }, 1500);
-      }, 100);
-    }
-  };
-
   const windowRefs = useRef({});
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex items-center gap-8 mb-4">
-        <button
-          onClick={togglePower}
-          className={`w-12 h-12 rounded-full border-4 ms-10 flex items-center justify-center transition-all duration-500 ${
-            isPowered
-              ? "border-secondary bg-secondary/20 text-secondary"
-              : "border-red-500 bg-red-500/20 text-red-500"
-          }`}
-        >
-          <img src="/images/power-32.png" alt="" />
-        </button>
-      </div>
-
       {/* Note Card */}
       <div className="max-w-2xl mx-auto mb-8 p-4 bg-[#101010] border border-primary/20 rounded-lg">
         <p className="text-white/80 text-center text-sm md:text-sm leading-relaxed">
@@ -255,26 +234,36 @@ const Pc = () => {
                 {/* Desktop Icons */}
                 <div className="relative min-h-full">
                   {apps.map((app, index) => {
-                    const position = getInitialPosition(index);
+                    const defaultPosition = getInitialPosition(index);
+                    const position = iconPositions[app.id] || defaultPosition;
+                    
+                    if (!appIconRefs.current[app.id]) {
+                      appIconRefs.current[app.id] = React.createRef();
+                    }
+
                     return (
-                      <div
+                      <Draggable
                         key={app.id}
-                        className="flex flex-col items-center absolute"
-                        style={{
-                          left: position.x,
-                          top: position.y
-                        }}
-                        onDoubleClick={() => openApp(app)}
+                        nodeRef={appIconRefs.current[app.id]}
+                        bounds="parent"
+                        defaultPosition={position}
+                        onStop={(e, data) => handleIconDrag(app.id, data)}
                       >
-                        <img
-                          src={app.icon}
-                          alt={app.name}
-                          className="w-12 h-12 md:w-12 md:h-12 pointer-events-none drop-shadow-lg"
-                        />
-                        <span className="text-white text-xs md:text-sm mt-2 text-center pointer-events-none px-1 ">
-                          {app.name}
-                        </span>
-                      </div>
+                        <div
+                          ref={appIconRefs.current[app.id]}
+                          className="flex flex-col items-center absolute cursor-move"
+                          onDoubleClick={() => openApp(app)}
+                        >
+                          <img
+                            src={app.icon}
+                            alt={app.name}
+                            className="w-12 h-12 md:w-12 md:h-12 drop-shadow-lg"
+                          />
+                          <span className="text-white text-xs md:text-sm mt-2 text-center px-1">
+                            {app.name}
+                          </span>
+                        </div>
+                      </Draggable>
                     );
                   })}
                 </div>

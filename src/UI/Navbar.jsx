@@ -129,7 +129,7 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div
           className="fixed inset-0 bg-black backdrop-blur-sm z-[9999]"

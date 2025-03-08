@@ -96,7 +96,6 @@ const VSCode = () => {
 
   return (
     <div className="h-full flex flex-col bg-[#1E1E1E]">
-      {/* Tab Bar with Run Button */}
       <div className="flex justify-between bg-[#252526] px-2">
         <div className="px-3 py-2 text-sm flex items-center gap-2 bg-[#1E1E1E] text-white">
         <BsFiletypeHtml className='h-5 w-5' />

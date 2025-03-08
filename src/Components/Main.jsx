@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Orbits from "./Orbits.jsx";
+import Orbits from "../UI/Orbits";
 
 const Main = () => {
   const [currentTime, setCurrentTime] = useState(new Date());

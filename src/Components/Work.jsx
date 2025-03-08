@@ -16,7 +16,7 @@ const Work = () => {
             isVideo: false,
             title: "Snackhub",
             description: "Food delivery platform with real-time order tracking",
-            github: "https://github.com/yourusername/snackhub",
+            github: "https://github.com/",
             live: "https://snackhub-app.netlify.app"
         },
         {
@@ -25,7 +25,7 @@ const Work = () => {
             title: "Vente Vision",
             description: "E-commerce dashboard with analytics and inventory management",
             github: "https://github.com/",
-            live: "http://localhost:5173"
+            live: "http://404"
         },
         {
             media: "/images/University Fields.png",
