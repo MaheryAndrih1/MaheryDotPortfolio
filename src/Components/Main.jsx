@@ -63,7 +63,7 @@ const Main = () => {
           <p className="font-typewriter text-xl text-white/70 mb-2">You can call me</p>
           <h1 className="font-header text-emerald-500/70 text-7xl md:text-7xl mb-4">Mahery</h1>
           <p className="font-typewriter text-center text-white/70 text-base md:text-xl">
-            I am a full-stack developer,<br /> ready to turn your idea into reality.
+            I am a full-stack developer,<br /> ready to turn your ideas into reality.
           </p>
         </div>
 

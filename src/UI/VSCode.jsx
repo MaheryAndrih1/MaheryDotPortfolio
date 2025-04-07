@@ -49,7 +49,6 @@ const VSCode = () => {
             <span class="tech-item">JavaScript</span>
             <span class="tech-item">HTML/CSS</span>
             <span class="tech-item">Java</span>
-            <span class="tech-item">TypeScript</span>
         </div>
     </div>
 

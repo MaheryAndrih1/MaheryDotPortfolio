@@ -5,7 +5,7 @@ import VSCode from './VSCode';
 import { usePower } from "./PowerButton";
 
 const Pc = () => {
-  // Get shared state from context
+  
   const { 
     isPowered, 
     isStarting, 
@@ -13,7 +13,7 @@ const Pc = () => {
     setOpenWindows 
   } = usePower();
   
-  // Local state
+  
   const [minimizedWindows, setMinimizedWindows] = useState([]);
   const workAreaRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(new Date());
