@@ -42,7 +42,6 @@ const Work = () => {
         }
     ];
 
-    // Duplicate projects to ensure a seamless loop
     const duplicatedProjects = [...projects, ...projects, ...projects];
 
     const ProjectItem = ({ project }) => (
