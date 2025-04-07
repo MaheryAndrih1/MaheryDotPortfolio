@@ -100,7 +100,7 @@ const Work = () => {
             
             <p className="text-gray-300 mb-6 text-lg">{project.description}</p>
             
-            <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 {project.images.map((image, index) => (
                     <div key={index} className="rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-md cursor-pointer">
                         {project.live ? (
@@ -114,7 +114,7 @@ const Work = () => {
                 ))}
             </div>
             
-            <div className="flex justify-between items-end">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
                 <div className="flex gap-4">
                     <a 
                         href={project.github} 
@@ -136,7 +136,7 @@ const Work = () => {
                     )}
                 </div>
                 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2 mt-4 sm:mt-0">
                     {project.technologies.map((tech, index) => (
                         <span key={index} className="bg-black/40 px-3 py-1 rounded text-xs text-gray-300 border border-purple-800/30">
                             {tech}
